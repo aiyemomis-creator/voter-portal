@@ -61,3 +61,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+// ===============================
+// AUTO ACTIVE NAV LINK
+// ===============================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const navLinks = document.querySelectorAll(".nav-links a");
+
+  // Get current file name
+  const currentPage = window.location.pathname.split("/").pop();
+
+  navLinks.forEach(link => {
+    const linkPage = link.getAttribute("href");
+
+    if (linkPage === currentPage || 
+        (currentPage === "" && linkPage === "index.html")) {
+      link.classList.add("active");
+    }
+
+  });
+
+});
