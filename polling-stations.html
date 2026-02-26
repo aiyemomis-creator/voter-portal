@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polling Station Lookup</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #2d6a4f;
+      --green-dark: #1b4332;
+      --green-light: #d8f3dc;
+      --bg: #f3f4f6;
+      --white: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --chip-bg: #e8f5e9;
+      --chip-text: #2d6a4f;
+      --chip-border: #c8e6c9;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      color: var(--text);
+    }
+
+    /* Header */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--green);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+    }
+
+    .logo-text h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .logo-text p {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* Main */
+    main {
+      max-width: 680px;
+      margin: 60px auto;
+      padding: 0 24px;
+    }
+
+    /* Search */
+    .search-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .search-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--muted);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 16px 14px 46px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    input[type="text"]::placeholder {
+      color: var(--muted);
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.12);
+    }
+
+    /* Chips */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      background: var(--chip-bg);
+      color: var(--chip-text);
+      border: 1px solid var(--chip-border);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      user-select: none;
+    }
+
+    .chip:hover {
+      background: #c8e6c9;
+      transform: translateY(-1px);
+    }
+
+    .chip:active {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    VoteWise
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="polling-stations.html">Polling Stations</a></li>
+    <li><a href="elections.html">Elections</a></li>
+    <li><a href="procedures.html">How to Vote</a></li>
+    <li><a href="candidates.html">Candidates</a></li>
+    <li><a href="FAQ.html">FAQ</a></li>
+  </ul>
+</nav>
+  <header>
+    <div class="logo-icon">
+      <!-- Ballot/list icon -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="3" width="16" height="18" rx="2" fill="white" opacity="0.25"/>
+        <rect x="4" y="3" width="16" height="18" rx="2" stroke="white" stroke-width="1.5" fill="none"/>
+        <line x1="8" y1="8" x2="16" y2="8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="8" y1="12" x2="16" y2="12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="8" y1="16" x2="12" y2="16" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <h1>Polling Station Lookup</h1>
+      <p>Find your nearest polling station by LGA</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="search-wrapper">
+      <div class="search-icon">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"/>
+          <line x1="16.5" y1="16.5" x2="22" y2="22"/>
+        </svg>
+      </div>
+      <input type="text" placeholder="Type a Local Government Area (e.g. Ikeja, Surulere)...">
+    </div>
+
+    <div class="chips">
+      <div class="chip">Ikeja</div>
+      <div class="chip">Surulere</div>
+      <div class="chip">Eti-Osa</div>
+      <div class="chip">Alimosho</div>
+      <div class="chip">Mushin</div>
+      <div class="chip">Kosofe</div>
+      <div class="chip">Ikorodu</div>
+    </div>
+  </main>
+<script src="js/data.js"></script>
+<script src="js/polling.js"></script>
+<script src="js/app.js"></script>
+<footer>
+  <p>Built by James and Samuel | AI Software Engineering Internship 2026</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Civic Calendar – Election Dates & Deadlines</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f0f4f0;
+      --hero-bg: #e4ede6;
+      --card-bg: #ffffff;
+      --green-dark: #1c4230;
+      --green-mid: #2e6b4f;
+      --green-btn: #2e6b4f;
+      --green-light: #d6e8db;
+      --text: #2a3728;
+      --muted: #5a6e5c;
+      --border: #d4dfd5;
+      --closed-bg: #e8e8e8;
+      --closed-text: #777;
+      --timeline-line: #9cbfab;
+      --dot: #2e6b4f;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-icon {
+      font-size: 20px;
+      color: var(--green-dark);
+    }
+
+    .nav-brand {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--green-dark);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--hero-bg);
+      padding: 52px 32px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 4vw, 40px);
+      color: var(--green-dark);
+      margin-bottom: 16px;
+    }
+
+    .hero-title-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      color: var(--green-dark);
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 480px;
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 36px 32px 60px;
+    }
+
+    /* Notice */
+    .notice {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+
+    .notice svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      stroke: var(--muted);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 1.5px;
+      background: var(--timeline-line);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 32px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -36px;
+      top: 22px;
+      width: 12px;
+      height: 12px;
+      background: var(--dot);
+      border-radius: 50%;
+      transform: translateX(2px);
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px 20px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      gap: 12px;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--green-dark);
+      line-height: 1.3;
+    }
+
+    .card-title.dimmed {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .badge {
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .badge-open {
+      background: var(--green-btn);
+      color: #fff;
+    }
+
+    .badge-closed {
+      background: var(--closed-bg);
+      color: var(--closed-text);
+    }
+
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-item svg {
+      width: 15px;
+      height: 15px;
+      stroke: var(--green-mid);
+      fill: none;
+      stroke-width: 1.6;
+      flex-shrink: 0;
+    }
+
+    .meta-label {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .meta-date {
+      color: var(--green-mid);
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .meta-date.dimmed {
+      color: var(--muted);
+    }
+
+    .concluded {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .concluded svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--muted);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    VoteWise
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="polling-stations.html">Polling Stations</a></li>
+    <li><a href="elections.html">Elections</a></li>
+    <li><a href="procedures.html">How to Vote</a></li>
+    <li><a href="candidates.html">Candidates</a></li>
+    <li><a href="FAQ.html">FAQ</a></li>
+  </ul>
+</nav>
+  <!-- NAV -->
+  <nav>
+    <span class="nav-icon">🏛</span>
+    <span class="nav-brand">Civic Calendar</span>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <h1 class="hero-title">
+        <!-- Ballot icon -->
+        <svg class="hero-title-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="4" width="24" height="28" rx="3"/>
+          <polyline points="13,17 16,20 23,13"/>
+          <line x1="13" y1="25" x2="23" y2="25"/>
+        </svg>
+        Election Dates &amp; Deadlines
+      </h1>
+      <p class="hero-desc">Stay informed and never miss a registration deadline. Plan ahead for every upcoming election in 2026.</p>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main>
+
+    <div class="notice">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      All dates are subject to change. Check your local election office for updates.
+    </div>
+
+    <div class="timeline">
+
+      <!-- 1. Presidential Primary -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title dimmed">Presidential Primary Election</div>
+            <span class="badge badge-closed">Closed</span>
+          </div>
+          <p class="card-desc">Vote for your party's presidential nominee. All registered voters may participate in their party's primary.</p>
+          <div class="card-meta">
+            <div class="meta-item">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span class="meta-label">Election:</span>
+              <span class="meta-date dimmed">March 5, 2026</span>
+            </div>
+            <div class="meta-item">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12,6 12,12 15,15"/></svg>
+              <span class="meta-label">Register by:</span>
+              <span class="meta-date dimmed">February 18, 2026</span>
+            </div>
+          </div>
+          <div class="concluded">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12,6 12,12 15,15"/></svg>
+            This election has concluded
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Municipal Elections -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Municipal Elections</div>
+            <span class="badge badge-open">Open</span>
+          </div>
+          <p class="card-desc">Elect your local city council members, mayor, and school board representatives. Local races shape your daily life.</p>
+          <div class="card-meta">
+            <div class="meta-item">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span class="meta-label">Election:</span>
+              <span class="meta-date">May 6, 2026</span>
+            </div>
+            <div class="meta-item">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12,6 12,12 15,15"/></svg>
+              <span class="meta-label">Register by:</span>
+              <span class="meta-date">April 21, 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. State Midterm -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">State Midterm Election</div>
+            <span class="badge badge-open">Open</span>
+          </div>
+          <p class="card-desc">Statewide races for governor, state legislators, and ballot measures on education and infrastructure funding.</p>
+          <div class="card-meta">
+            <div class="meta-item">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span class="meta-label">Election:</span>
+              <span class="meta-date">June 10, 2026</span>
+            </div>
+            <div class="meta-item">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12,6 12,12 15,15"/></svg>
+              <span class="meta-label">Register by:</span>
+              <span class="meta-date">May 25, 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. General Election -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">General Election</div>
+            <span class="badge badge-open">Open</span>
+          </div>
+          <p class="card-desc">The nationwide general election for federal, state, and local offices. Make your voice heard on every level.</p>
+          <div class="card-meta">
+            <div class="meta-item">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span class="meta-label">Election:</span>
+              <span class="meta-date">November 3, 2026</span>
+            </div>
+            <div class="meta-item">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12,6 12,12 15,15"/></svg>
+              <span class="meta-label">Register by:</span>
+              <span class="meta-date">October 19, 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Special Runoff -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Special Runoff Election</div>
+            <span class="badge badge-open">Open</span>
+          </div>
+          <p class="card-desc">Runoff for any races that did not produce a majority winner in the general election. Your vote still matters.</p>
+          <div class="card-meta">
+            <div class="meta-item">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span class="meta-label">Election:</span>
+              <span class="meta-date">December 8, 2026</span>
+            </div>
+            <div class="meta-item">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12,6 12,12 15,15"/></svg>
+              <span class="meta-label">Register by:</span>
+              <span class="meta-date">November 22, 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Civic Calendar · For informational purposes only
+  </footer>
+  <script src="js/data.js"></script>
+  <script src="js/elections.js"></script>
+<script src="js/app.js"></script>
+<footer>
+  <p>Built by James and Samuel | AI Software Engineering Internship 2026</p>
+</footer>
+</body>
+</html>
