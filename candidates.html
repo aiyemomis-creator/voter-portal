@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Civic Voices – Candidates & Parties</title>
   <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/modal.css">
   <style>
     *,
     *::before,
@@ -1165,6 +1166,26 @@
       </div>
 
     </div><!-- /grid -->
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="manifestoModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">Candidate Name</h2>
+        <div class="modal-subtitle" id="modalSubtitle">Role</div>
+      </div>
+      <div class="modal-body" id="modalBody">
+        Manifesto text goes here...
+      </div>
+    </div>
   </div>
 
   <script>
