@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results – VoteWise</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <style>
+        main.search-page {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 24px;
+            min-height: 60vh;
+        }
+
+        .search-header {
+            margin-bottom: 40px;
+        }
+
+        .search-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .search-header p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .search-results-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .search-result-item {
+            background: #fff;
+            border: 1px solid #dde5dc;
+            border-radius: 12px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            transition: box-shadow 0.2s, transform 0.2s;
+            display: block;
+        }
+
+        .search-result-item:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .search-result-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2d6a4f;
+            margin-bottom: 8px;
+        }
+
+        .search-result-desc {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .search-result-meta {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1b5e42;
+            background: #eef0ee;
+            padding: 4px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 0;
+            color: #555;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="vw-nav">
+        <a href="index.html" class="nav-logo">
+            <div class="logo-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>
+            </div>
+            VoteWise
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="polling-stations.html">Polling Stations</a></li>
+            <li><a href="elections.html">Elections</a></li>
+            <li><a href="procedures.html">How to Vote</a></li>
+            <li><a href="candidates.html">Candidates</a></li>
+            <li><a href="FAQ.html">FAQ</a></li>
+        </ul>
+    </nav>
+
+    <main class="search-page">
+        <div class="search-header">
+            <h1 id="search-title">Search Results</h1>
+            <p id="search-subtitle">Showing results for "..."</p>
+        </div>
+
+        <div class="search-results-list" id="search-results">
+            <!-- Results populated here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>Built by James and Samuel | AI Software Engineering Internship 2026</p>
+    </footer>
+
+    <script src="js/search.js"></script>
+</body>
+
+</html>
