@@ -55,7 +55,7 @@
     <p class="features-sub">Quick access to essential voter resources, all in one place.</p>
     <div class="cards">
 
-      <div class="card">
+      <a href="polling-stations.html" class="card" style="text-decoration: none; color: inherit;">
         <div class="card-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
@@ -65,9 +65,9 @@
         </div>
         <h3>Find Polling Station</h3>
         <p>Locate your nearest polling station with our interactive map and get directions instantly.</p>
-      </div>
+      </a>
 
-      <div class="card">
+      <a href="elections.html" class="card" style="text-decoration: none; color: inherit;">
         <div class="card-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
@@ -79,9 +79,9 @@
         </div>
         <h3>Election Dates</h3>
         <p>Stay updated with upcoming national, state, and local election dates and deadlines.</p>
-      </div>
+      </a>
 
-      <div class="card">
+      <a href="procedures.html" class="card" style="text-decoration: none; color: inherit;">
         <div class="card-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
@@ -91,9 +91,9 @@
         </div>
         <h3>Voting Guide</h3>
         <p>Step-by-step guide on how to register, verify your status, and cast your vote.</p>
-      </div>
+      </a>
 
-      <div class="card">
+      <a href="candidates.html" class="card" style="text-decoration: none; color: inherit;">
         <div class="card-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
@@ -105,7 +105,20 @@
         </div>
         <h3>Candidates</h3>
         <p>Explore candidate profiles, track records, and manifestos to make informed choices.</p>
-      </div>
+      </a>
+
+      <a href="FAQ.html" class="card" style="text-decoration: none; color: inherit;">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+        </div>
+        <h3>FAQ</h3>
+        <p>Get clear answers to common questions and separate fact from fiction.</p>
+      </a>
 
     </div>
   </section>
@@ -123,13 +136,7 @@
       }
     });
 
-    // Card click
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('click', () => {
-        const title = card.querySelector('h3').textContent;
-        console.log('Navigating to:', title);
-      });
-    });
+    // Removed card click JS as they are now anchor tags.
   </script>
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
