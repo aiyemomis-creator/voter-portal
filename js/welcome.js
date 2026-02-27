@@ -1,5 +1,32 @@
 // Simple Fireworks Animation via Canvas
 document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('welcome-overlay');
+    if (!overlay) return;
+
+    // Determine if we should play the animation
+    const navEntries = performance.getEntriesByType("navigation");
+    const navType = navEntries.length > 0 ? navEntries[0].type : '';
+    const hasStarted = sessionStorage.getItem('welcomePlayed');
+
+    let shouldPlay = false;
+
+    // Play if it's the very first time opening in this session
+    if (!hasStarted) {
+        shouldPlay = true;
+        sessionStorage.setItem('welcomePlayed', 'true');
+    }
+    // Play if the user explicitly refreshed the page
+    else if (navType === 'reload') {
+        shouldPlay = true;
+    }
+
+    // If not a fresh open or reload (e.g., clicking Home link), skip animation
+    if (!shouldPlay) {
+        overlay.style.display = 'none';
+        document.body.classList.remove('welcome-active');
+        return;
+    }
+
     const canvas = document.getElementById('fireworks-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -99,9 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     animate();
-
-    // Handle overlay dismissal
-    const overlay = document.getElementById('welcome-overlay');
 
     // Make the body unscrollable initially
     document.body.classList.add('welcome-active');
