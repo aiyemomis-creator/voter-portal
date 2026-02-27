@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Polling Station Lookup</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/navbar.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --green: #2d6a4f;
@@ -112,7 +120,7 @@
       color: var(--text);
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
     input[type="text"]::placeholder {
@@ -154,32 +162,36 @@
     }
   </style>
 </head>
+
 <body>
-<nav>
-  <a href="#" class="nav-logo">
-    <div class="logo-icon">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-    </div>
-    VoteWise
-  </a>
-  <ul class="nav-links">
-    </li><a href="index.html">Home</a></li>
-    <li><a href="polling-stations.html">Polling Stations</a></li>
-    <li><a href="elections.html">Elections</a></li>
-    <li><a href="procedures.html">How to Vote</a></li>
-    <li><a href="candidates.html">Candidates</a></li>
-    <li><a href="FAQ.html">FAQ</a></li>
-  </ul>
-</nav>
+  <nav class="vw-nav">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </div>
+      VoteWise
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="polling-stations.html">Polling Stations</a></li>
+      <li><a href="elections.html">Elections</a></li>
+      <li><a href="procedures.html">How to Vote</a></li>
+      <li><a href="candidates.html">Candidates</a></li>
+      <li><a href="FAQ.html">FAQ</a></li>
+    </ul>
+  </nav>
   <header>
     <div class="logo-icon">
       <!-- Ballot/list icon -->
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <rect x="4" y="3" width="16" height="18" rx="2" fill="white" opacity="0.25"/>
-        <rect x="4" y="3" width="16" height="18" rx="2" stroke="white" stroke-width="1.5" fill="none"/>
-        <line x1="8" y1="8" x2="16" y2="8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="8" y1="12" x2="16" y2="12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="8" y1="16" x2="12" y2="16" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        <rect x="4" y="3" width="16" height="18" rx="2" fill="white" opacity="0.25" />
+        <rect x="4" y="3" width="16" height="18" rx="2" stroke="white" stroke-width="1.5" fill="none" />
+        <line x1="8" y1="8" x2="16" y2="8" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+        <line x1="8" y1="12" x2="16" y2="12" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+        <line x1="8" y1="16" x2="12" y2="16" stroke="white" stroke-width="1.5" stroke-linecap="round" />
       </svg>
     </div>
     <div class="logo-text">
@@ -192,8 +204,8 @@
     <div class="search-wrapper">
       <div class="search-icon">
         <svg viewBox="0 0 24 24">
-          <circle cx="11" cy="11" r="7"/>
-          <line x1="16.5" y1="16.5" x2="22" y2="22"/>
+          <circle cx="11" cy="11" r="7" />
+          <line x1="16.5" y1="16.5" x2="22" y2="22" />
         </svg>
       </div>
       <input type="text" placeholder="Type a Local Government Area (e.g. Ikeja, Surulere)...">
@@ -209,11 +221,12 @@
       <div class="chip">Ikorodu</div>
     </div>
   </main>
-<script src="js/data.js"></script>
-<script src="js/polling.js"></script>
-<script src="js/app.js"></script>
-<footer>
-  <p>Built by James and Samuel | AI Software Engineering Internship 2026</p>
-</footer>
+  <script src="js/data.js"></script>
+  <script src="js/polling.js"></script>
+  <script src="js/app.js"></script>
+  <footer>
+    <p>Built by James and Samuel | AI Software Engineering Internship 2026</p>
+  </footer>
 </body>
+
 </html>

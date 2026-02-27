@@ -1,866 +1,1204 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Civic Voices – Candidates & Parties</title>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Civic Voices – Candidates & Parties</title>
+  <link rel="stylesheet" href="css/navbar.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  :root {
-    --bg: #f0faf4;
-    --card-bg: #ffffff;
-    --border: #c6e6d2;
-    --text: #0d2b1a;
-    --muted: #4a7a5e;
-    --small: #7aab8e;
-    --apc: #16a34a;
-    --pdp: #dc2626;
-    --lp: #7c3aed;
-    --nnpp: #d97706;
-    --apga: #0284c7;
-    --adc: #db2777;
-    --filter-active: #166534;
-    --filter-bg: #ffffff;
-    --manifesto: #f0faf4;
-    --avatar-bg: #d1fae5;
-    --avatar-icon: #4a7a5e;
-    --green-accent: #16a34a;
-    --green-light: #bbf7d0;
-  }
+    :root {
+      --bg: #f0faf4;
+      --card-bg: #ffffff;
+      --border: #c6e6d2;
+      --text: #0d2b1a;
+      --muted: #4a7a5e;
+      --small: #7aab8e;
+      --apc: #16a34a;
+      --pdp: #dc2626;
+      --lp: #7c3aed;
+      --nnpp: #d97706;
+      --apga: #0284c7;
+      --adc: #db2777;
+      --filter-active: #166534;
+      --filter-bg: #ffffff;
+      --manifesto: #f0faf4;
+      --avatar-bg: #d1fae5;
+      --avatar-icon: #4a7a5e;
+      --green-accent: #16a34a;
+      --green-light: #bbf7d0;
+    }
 
-  body {
-    font-family: 'Georgia', 'Times New Roman', serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
 
-  /* Nav */
-  .nav {
-    background: #166534;
-    border-bottom: 1px solid #14532d;
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    height: 52px;
-    gap: 20px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 14px;
-  }
-  .nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 700;
-    font-size: 15px;
-    color: #ffffff;
-    text-decoration: none;
-  }
-  .nav-brand-icon {
-    width: 28px;
-    height: 28px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .nav-brand-icon svg { width: 16px; height: 16px; fill: white; }
-  .nav-links { display: flex; gap: 24px; margin-left: 16px; }
-  .nav-links a {
-    color: rgba(255,255,255,0.7);
-    text-decoration: none;
-    font-size: 13px;
-    transition: color 0.15s;
-  }
-  .nav-links a:hover, .nav-links a.active { color: #ffffff; }
-  .nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
-  .btn-nav {
-    padding: 5px 14px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.3);
-    background: transparent;
-    color: #fff;
-    font-family: inherit;
-    transition: background 0.15s;
-  }
-  .btn-nav:hover { background: rgba(255,255,255,0.15); }
-  .btn-nav.primary {
-    background: #ffffff;
-    color: #166534;
-    border-color: #ffffff;
-  }
-  .btn-nav.primary:hover { background: #d1fae5; }
+    /* Nav */
+    .nav {
+      background: #166534;
+      border-bottom: 1px solid #14532d;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      height: 52px;
+      gap: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+    }
 
-  /* Main */
-  .container {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
-  }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      color: #ffffff;
+      text-decoration: none;
+    }
 
-  .page-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 6px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
-  .page-subtitle {
-    font-size: 14px;
-    color: var(--muted);
-    margin-bottom: 28px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
+    .nav-brand-icon {
+      width: 28px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  /* Filter tabs */
-  .filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 32px;
-  }
-  .filter-btn {
-    padding: 7px 16px;
-    border-radius: 9999px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    border: 1.5px solid var(--border);
-    background: var(--filter-bg);
-    color: var(--muted);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    transition: all 0.15s;
-    user-select: none;
-  }
-  .filter-btn:hover { border-color: #9ca3af; color: var(--text); }
-  .filter-btn.active {
-    background: var(--filter-active);
-    color: white;
-    border-color: var(--filter-active);
-  }
-  .filter-btn .count {
-    margin-left: 4px;
-    opacity: 0.75;
-    font-size: 12px;
-  }
+    .nav-brand-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: white;
+    }
 
-  /* Grid */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      margin-left: 16px;
+    }
 
-  /* Card */
-  .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    transition: box-shadow 0.18s;
-    animation: fadeUp 0.4s ease both;
-  }
-  .card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.15s;
+    }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #ffffff;
+    }
 
-  .card-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-  .avatar {
-    width: 52px;
-    height: 52px;
-    border-radius: 9999px;
-    background: var(--avatar-bg);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .avatar svg { width: 28px; height: 28px; }
+    .nav-right {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
 
-  .card-info { flex: 1; min-width: 0; }
-  .card-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 4px;
-    line-height: 1.3;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
-  .party-badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 4px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    letter-spacing: 0.02em;
-  }
-  .party-badge.apc  { background: var(--apc); }
-  .party-badge.pdp  { background: var(--pdp); }
-  .party-badge.lp   { background: var(--lp); }
-  .party-badge.nnpp { background: var(--nnpp); }
-  .party-badge.apga { background: var(--apga); }
-  .party-badge.adc  { background: var(--adc); }
+    .btn-nav {
+      padding: 5px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: transparent;
+      color: #fff;
+      font-family: inherit;
+      transition: background 0.15s;
+    }
 
-  .card-role {
-    font-size: 12px;
-    color: var(--muted);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
+    .btn-nav:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
 
-  .card-meta {
-    display: flex;
-    gap: 14px;
-    margin-bottom: 10px;
-    font-size: 12px;
-    color: var(--small);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
-  .meta-item { display: flex; align-items: center; gap: 4px; }
-  .meta-item svg { width: 12px; height: 12px; flex-shrink: 0; }
+    .btn-nav.primary {
+      background: #ffffff;
+      color: #166534;
+      border-color: #ffffff;
+    }
 
-  .card-bio {
-    font-size: 13px;
-    color: #4b5563;
-    line-height: 1.55;
-    margin-bottom: 16px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    flex: 1;
-  }
+    .btn-nav.primary:hover {
+      background: #d1fae5;
+    }
 
-  .btn-manifesto {
-    width: 100%;
-    padding: 9px;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    background: var(--manifesto);
-    color: #166534;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    transition: background 0.15s, border-color 0.15s;
-  }
-  .btn-manifesto:hover { background: #d1fae5; border-color: #16a34a; }
-  .btn-manifesto svg { width: 14px; height: 14px; }
+    /* Main */
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
 
-  /* Hidden cards */
-  .card[data-party]:not(.visible) { display: none; }
-</style>
+    .page-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 28px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    /* Filter tabs */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .filter-btn {
+      padding: 7px 16px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid var(--border);
+      background: var(--filter-bg);
+      color: var(--muted);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      transition: all 0.15s;
+      user-select: none;
+    }
+
+    .filter-btn:hover {
+      border-color: #9ca3af;
+      color: var(--text);
+    }
+
+    .filter-btn.active {
+      background: var(--filter-active);
+      color: white;
+      border-color: var(--filter-active);
+    }
+
+    .filter-btn .count {
+      margin-left: 4px;
+      opacity: 0.75;
+      font-size: 12px;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Card */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transition: box-shadow 0.18s;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 9999px;
+      background: var(--avatar-bg);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .card-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+      line-height: 1.3;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .party-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      letter-spacing: 0.02em;
+    }
+
+    .party-badge.apc {
+      background: var(--apc);
+    }
+
+    .party-badge.pdp {
+      background: var(--pdp);
+    }
+
+    .party-badge.lp {
+      background: var(--lp);
+    }
+
+    .party-badge.nnpp {
+      background: var(--nnpp);
+    }
+
+    .party-badge.apga {
+      background: var(--apga);
+    }
+
+    .party-badge.adc {
+      background: var(--adc);
+    }
+
+    .card-role {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .card-meta {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: var(--small);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .meta-item svg {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+    }
+
+    .card-bio {
+      font-size: 13px;
+      color: #4b5563;
+      line-height: 1.55;
+      margin-bottom: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      flex: 1;
+    }
+
+    .btn-manifesto {
+      width: 100%;
+      padding: 9px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: var(--manifesto);
+      color: #166534;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .btn-manifesto:hover {
+      background: #d1fae5;
+      border-color: #16a34a;
+    }
+
+    .btn-manifesto svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Hidden cards */
+    .card[data-party]:not(.visible) {
+      display: none;
+    }
+  </style>
 </head>
+
 <body>
-<nav>
-  <a href="#" class="nav-logo">
-    <div class="logo-icon">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <nav class="vw-nav">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </div>
+      VoteWise
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="polling-stations.html">Polling Stations</a></li>
+      <li><a href="elections.html">Elections</a></li>
+      <li><a href="procedures.html">How to Vote</a></li>
+      <li><a href="candidates.html">Candidates</a></li>
+      <li><a href="FAQ.html">FAQ</a></li>
+    </ul>
+  </nav>
+  <!-- Nav -->
+  <nav class="nav">
+    <a class="nav-brand" href="#">
+      <div class="nav-brand-icon">
+        <svg viewBox="0 0 20 20">
+          <path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 2a6 6 0 010 12A6 6 0 0110 4z" />
+        </svg>
+      </div>
+      Civic Voices
+    </a>
+
+  </nav>
+
+  <div class="container">
+    <h1 class="page-title">Candidates &amp; Parties</h1>
+
+    <!-- Filters -->
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All Parties</button>
+      <button class="filter-btn" data-filter="apc">APC <span class="count">3</span></button>
+      <button class="filter-btn" data-filter="pdp">PDP <span class="count">3</span></button>
+      <button class="filter-btn" data-filter="lp">LP <span class="count">3</span></button>
+      <button class="filter-btn" data-filter="nnpp">NNPP <span class="count">3</span></button>
+      <button class="filter-btn" data-filter="apga">APGA <span class="count">3</span></button>
+      <button class="filter-btn" data-filter="adc">ADC <span class="count">3</span></button>
     </div>
-    VoteWise
-  </a>
-  <ul class="nav-links">
-    </li><a href="index.html">Home</a></li>
-    <li><a href="polling-stations.html">Polling Stations</a></li>
-    <li><a href="elections.html">Elections</a></li>
-    <li><a href="procedures.html">How to Vote</a></li>
-    <li><a href="candidates.html">Candidates</a></li>
-    <li><a href="FAQ.html">FAQ</a></li>
-  </ul>
-</nav>
-<!-- Nav -->
-<nav class="nav">
-  <a class="nav-brand" href="#">
-    <div class="nav-brand-icon">
-      <svg viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 2a6 6 0 010 12A6 6 0 0110 4z"/></svg>
-    </div>
-    Civic Voices
-  </a>
 
-</nav>
+    <!-- Grid -->
+    <div class="grid" id="grid">
 
-<div class="container">
-  <h1 class="page-title">Candidates &amp; Parties</h1>
+      <!-- APC -->
+      <div class="card visible" data-party="apc">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Engr. Adewale Okonkwo</div>
+            <span class="party-badge apc">APC</span>
+            <div class="card-role">Presidential Candidate</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Osun
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 62
+          </span>
+        </div>
+        <p class="card-bio">Civil Engineer &amp; Former Minister of Works. B.Eng Civil Engineering, University of Ife;
+          MSc Infrastructure Policy, University of Edinburgh.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
 
-  <!-- Filters -->
-  <div class="filters">
-    <button class="filter-btn active" data-filter="all">All Parties</button>
-    <button class="filter-btn" data-filter="apc">APC <span class="count">3</span></button>
-    <button class="filter-btn" data-filter="pdp">PDP <span class="count">3</span></button>
-    <button class="filter-btn" data-filter="lp">LP <span class="count">3</span></button>
-    <button class="filter-btn" data-filter="nnpp">NNPP <span class="count">3</span></button>
-    <button class="filter-btn" data-filter="apga">APGA <span class="count">3</span></button>
-    <button class="filter-btn" data-filter="adc">ADC <span class="count">3</span></button>
+      <div class="card visible" data-party="apc">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Dr. Hauwa Garba Idris</div>
+            <span class="party-badge apc">APC</span>
+            <div class="card-role">Governorship Candidate – Kano State</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Kano
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 54
+          </span>
+        </div>
+        <p class="card-bio">Public Health Physician &amp; Politician. MBBS, Ahmadu Bello University; MPH, Johns Hopkins
+          University.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="card visible" data-party="apc">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Hon. Chukwuemeka Nwosu</div>
+            <span class="party-badge apc">APC</span>
+            <div class="card-role">Senatorial Candidate – Anambra Central</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Anambra
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 48
+          </span>
+        </div>
+        <p class="card-bio">Barrister &amp; Former House of Representatives Member. LLB, University of Nigeria Nsukka;
+          BL, Nigerian Law School.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- PDP -->
+      <div class="card visible" data-party="pdp">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Alhaji Babatunde Fashola-Adeleke</div>
+            <span class="party-badge pdp">PDP</span>
+            <div class="card-role">Presidential Candidate</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Kwara
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 58
+          </span>
+        </div>
+        <p class="card-bio">Economist &amp; Former Central Bank Deputy Governor. BSc Economics, University of Lagos;
+          MBA, INSEAD Business School.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="card visible" data-party="pdp">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Prof. Ngozi Amara Eze</div>
+            <span class="party-badge pdp">PDP</span>
+            <div class="card-role">Governorship Candidate – Rivers State</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Rivers
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 51
+          </span>
+        </div>
+        <p class="card-bio">Academic &amp; Women's Rights Activist. BSc Political Science, University of Port Harcourt;
+          PhD Development Studies, University of Ibadan.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="card visible" data-party="pdp">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Col. (Rtd.) Musa Danladi Usman</div>
+            <span class="party-badge pdp">PDP</span>
+            <div class="card-role">Senatorial Candidate – Plateau North</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Plateau
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 65
+          </span>
+        </div>
+        <p class="card-bio">Retired Military Officer &amp; Farmer. BSc Military Science, Nigerian Defence Academy; MSc
+          Strategic Studies, University of Jos.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- LP -->
+      <div class="card visible" data-party="lp">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Dr. Obiageli Kanu-Obi</div>
+            <span class="party-badge lp">LP</span>
+            <div class="card-role">Presidential Candidate</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Enugu
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 50
+          </span>
+        </div>
+        <p class="card-bio">Economist &amp; Trade Union Leader. BSc Economics, University of Nigeria Nsukka; PhD
+          Development Economics, London School of Economics.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="card visible" data-party="lp">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Barr. Segun Adelabu Bankole</div>
+            <span class="party-badge lp">LP</span>
+            <div class="card-role">Governorship Candidate – Oyo State</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Oyo
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 45
+          </span>
+        </div>
+        <p class="card-bio">Human Rights Lawyer &amp; Civic Activist. LLB, Obafemi Awolowo University; LLM Human Rights
+          Law, University of Cape Town.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="card visible" data-party="lp">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Hon. Aisha Maikudi Bello</div>
+            <span class="party-badge lp">LP</span>
+            <div class="card-role">Senatorial Candidate – Kaduna South</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Kaduna
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 39
+          </span>
+        </div>
+        <p class="card-bio">Community Organiser &amp; Interfaith Peacebuilder. BSc Sociology, Ahmadu Bello University;
+          MSc Conflict Resolution, University of Bradford.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- NNPP -->
+      <div class="card visible" data-party="nnpp">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Sen. Rabiu Suleiman Kwankwaso</div>
+            <span class="party-badge nnpp">NNPP</span>
+            <div class="card-role">Presidential Candidate</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Kano
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 67
+          </span>
+        </div>
+        <p class="card-bio">Engineer &amp; Veteran Politician. BSc Civil Engineering, Ahmadu Bello University; MSc Water
+          Resources Engineering, University of Reading.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="card visible" data-party="nnpp">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Arch. Fatima Zahra Maigari</div>
+            <span class="party-badge nnpp">NNPP</span>
+            <div class="card-role">Governorship Candidate – Adamawa State</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Adamawa
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 47
+          </span>
+        </div>
+        <p class="card-bio">Architect &amp; Urban Development Consultant. B.Arch, Ahmadu Bello University; MSc Urban
+          Planning, University of Stuttgart.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="card visible" data-party="nnpp">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Dr. Idris Yusuf Galadima</div>
+            <span class="party-badge nnpp">NNPP</span>
+            <div class="card-role">Senatorial Candidate – Kano Central</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Kano
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 55
+          </span>
+        </div>
+        <p class="card-bio">Epidemiologist &amp; Public Health Advocate. MBBS, Bayero University Kano; PhD Epidemiology,
+          London School of Hygiene &amp; Tropical Medicine.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- APGA -->
+      <div class="card visible" data-party="apga">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Prof. Emeka Ozoemena Ifejirika</div>
+            <span class="party-badge apga">APGA</span>
+            <div class="card-role">Presidential Candidate</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Anambra
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 61
+          </span>
+        </div>
+        <p class="card-bio">Professor of Political Science &amp; Former Commissioner. BA Political Science, UNN; PhD
+          Comparative Politics, University of London.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="card visible" data-party="apga">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Hon. Chidinma Roseline Obasi</div>
+            <span class="party-badge apga">APGA</span>
+            <div class="card-role">Governorship Candidate – Imo State</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Imo
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 44
+          </span>
+        </div>
+        <p class="card-bio">Former Local Government Chair &amp; Women's Advocate. BSc Public Administration, FUTO; MSc
+          Gender Studies, University of Ibadan.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="card visible" data-party="apga">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Engr. Ikechukwu Ositadinma Nwachukwu</div>
+            <span class="party-badge apga">APGA</span>
+            <div class="card-role">Senatorial Candidate – Abia North</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Abia
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 53
+          </span>
+        </div>
+        <p class="card-bio">Civil Engineer &amp; Entrepreneur. BEng Civil Engineering, FUTO; MSc Construction
+          Management, Loughborough University.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- ADC -->
+      <div class="card visible" data-party="adc">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Dr. Abubakar Sadiq Musa</div>
+            <span class="party-badge adc">ADC</span>
+            <div class="card-role">Presidential Candidate</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Sokoto
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 56
+          </span>
+        </div>
+        <p class="card-bio">Medical Doctor &amp; Healthcare Reformist. MBChB, Bayero University; MPH, Harvard T.H. Chan
+          School of Public Health.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="card visible" data-party="adc">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Mrs. Blessing Nkechi Okafor</div>
+            <span class="party-badge adc">ADC</span>
+            <div class="card-role">Governorship Candidate – Enugu State</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Enugu
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 49
+          </span>
+        </div>
+        <p class="card-bio">Businesswoman &amp; Former State Commissioner. BSc Business Administration, UNN; MBA, Lagos
+          Business School.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="card visible" data-party="adc">
+        <div class="card-header">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <div class="card-name">Barr. Uche Emmanuel Ani</div>
+            <span class="party-badge adc">ADC</span>
+            <div class="card-role">Senatorial Candidate – Cross River South</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Cross River
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <path d="M16 2v4M8 2v4M3 10h18" />
+            </svg>
+            Age 42
+          </span>
+        </div>
+        <p class="card-bio">Barrister &amp; Youth Advocate. LLB, University of Calabar; BL, Nigerian Law School; LLM,
+          University of Lagos.</p>
+        <button class="btn-manifesto">
+          View Manifesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+    </div><!-- /grid -->
   </div>
 
-  <!-- Grid -->
-  <div class="grid" id="grid">
+  <script>
+    const filters = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.card[data-party]');
 
-    <!-- APC -->
-    <div class="card visible" data-party="apc">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Engr. Adewale Okonkwo</div>
-          <span class="party-badge apc">APC</span>
-          <div class="card-role">Presidential Candidate</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Osun
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 62
-        </span>
-      </div>
-      <p class="card-bio">Civil Engineer &amp; Former Minister of Works. B.Eng Civil Engineering, University of Ife; MSc Infrastructure Policy, University of Edinburgh.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
+    filters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filters.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
 
-    <div class="card visible" data-party="apc">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Dr. Hauwa Garba Idris</div>
-          <span class="party-badge apc">APC</span>
-          <div class="card-role">Governorship Candidate – Kano State</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Kano
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 54
-        </span>
-      </div>
-      <p class="card-bio">Public Health Physician &amp; Politician. MBBS, Ahmadu Bello University; MPH, Johns Hopkins University.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <div class="card visible" data-party="apc">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Hon. Chukwuemeka Nwosu</div>
-          <span class="party-badge apc">APC</span>
-          <div class="card-role">Senatorial Candidate – Anambra Central</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Anambra
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 48
-        </span>
-      </div>
-      <p class="card-bio">Barrister &amp; Former House of Representatives Member. LLB, University of Nigeria Nsukka; BL, Nigerian Law School.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <!-- PDP -->
-    <div class="card visible" data-party="pdp">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Alhaji Babatunde Fashola-Adeleke</div>
-          <span class="party-badge pdp">PDP</span>
-          <div class="card-role">Presidential Candidate</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Kwara
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 58
-        </span>
-      </div>
-      <p class="card-bio">Economist &amp; Former Central Bank Deputy Governor. BSc Economics, University of Lagos; MBA, INSEAD Business School.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <div class="card visible" data-party="pdp">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Prof. Ngozi Amara Eze</div>
-          <span class="party-badge pdp">PDP</span>
-          <div class="card-role">Governorship Candidate – Rivers State</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Rivers
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 51
-        </span>
-      </div>
-      <p class="card-bio">Academic &amp; Women's Rights Activist. BSc Political Science, University of Port Harcourt; PhD Development Studies, University of Ibadan.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <div class="card visible" data-party="pdp">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Col. (Rtd.) Musa Danladi Usman</div>
-          <span class="party-badge pdp">PDP</span>
-          <div class="card-role">Senatorial Candidate – Plateau North</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Plateau
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 65
-        </span>
-      </div>
-      <p class="card-bio">Retired Military Officer &amp; Farmer. BSc Military Science, Nigerian Defence Academy; MSc Strategic Studies, University of Jos.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <!-- LP -->
-    <div class="card visible" data-party="lp">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Dr. Obiageli Kanu-Obi</div>
-          <span class="party-badge lp">LP</span>
-          <div class="card-role">Presidential Candidate</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Enugu
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 50
-        </span>
-      </div>
-      <p class="card-bio">Economist &amp; Trade Union Leader. BSc Economics, University of Nigeria Nsukka; PhD Development Economics, London School of Economics.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <div class="card visible" data-party="lp">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Barr. Segun Adelabu Bankole</div>
-          <span class="party-badge lp">LP</span>
-          <div class="card-role">Governorship Candidate – Oyo State</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Oyo
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 45
-        </span>
-      </div>
-      <p class="card-bio">Human Rights Lawyer &amp; Civic Activist. LLB, Obafemi Awolowo University; LLM Human Rights Law, University of Cape Town.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <div class="card visible" data-party="lp">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Hon. Aisha Maikudi Bello</div>
-          <span class="party-badge lp">LP</span>
-          <div class="card-role">Senatorial Candidate – Kaduna South</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Kaduna
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 39
-        </span>
-      </div>
-      <p class="card-bio">Community Organiser &amp; Interfaith Peacebuilder. BSc Sociology, Ahmadu Bello University; MSc Conflict Resolution, University of Bradford.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <!-- NNPP -->
-    <div class="card visible" data-party="nnpp">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Sen. Rabiu Suleiman Kwankwaso</div>
-          <span class="party-badge nnpp">NNPP</span>
-          <div class="card-role">Presidential Candidate</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Kano
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 67
-        </span>
-      </div>
-      <p class="card-bio">Engineer &amp; Veteran Politician. BSc Civil Engineering, Ahmadu Bello University; MSc Water Resources Engineering, University of Reading.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <div class="card visible" data-party="nnpp">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Arch. Fatima Zahra Maigari</div>
-          <span class="party-badge nnpp">NNPP</span>
-          <div class="card-role">Governorship Candidate – Adamawa State</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Adamawa
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 47
-        </span>
-      </div>
-      <p class="card-bio">Architect &amp; Urban Development Consultant. B.Arch, Ahmadu Bello University; MSc Urban Planning, University of Stuttgart.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <div class="card visible" data-party="nnpp">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Dr. Idris Yusuf Galadima</div>
-          <span class="party-badge nnpp">NNPP</span>
-          <div class="card-role">Senatorial Candidate – Kano Central</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Kano
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 55
-        </span>
-      </div>
-      <p class="card-bio">Epidemiologist &amp; Public Health Advocate. MBBS, Bayero University Kano; PhD Epidemiology, London School of Hygiene &amp; Tropical Medicine.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <!-- APGA -->
-    <div class="card visible" data-party="apga">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Prof. Emeka Ozoemena Ifejirika</div>
-          <span class="party-badge apga">APGA</span>
-          <div class="card-role">Presidential Candidate</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Anambra
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 61
-        </span>
-      </div>
-      <p class="card-bio">Professor of Political Science &amp; Former Commissioner. BA Political Science, UNN; PhD Comparative Politics, University of London.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <div class="card visible" data-party="apga">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Hon. Chidinma Roseline Obasi</div>
-          <span class="party-badge apga">APGA</span>
-          <div class="card-role">Governorship Candidate – Imo State</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Imo
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 44
-        </span>
-      </div>
-      <p class="card-bio">Former Local Government Chair &amp; Women's Advocate. BSc Public Administration, FUTO; MSc Gender Studies, University of Ibadan.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <div class="card visible" data-party="apga">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Engr. Ikechukwu Ositadinma Nwachukwu</div>
-          <span class="party-badge apga">APGA</span>
-          <div class="card-role">Senatorial Candidate – Abia North</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Abia
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 53
-        </span>
-      </div>
-      <p class="card-bio">Civil Engineer &amp; Entrepreneur. BEng Civil Engineering, FUTO; MSc Construction Management, Loughborough University.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <!-- ADC -->
-    <div class="card visible" data-party="adc">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Dr. Abubakar Sadiq Musa</div>
-          <span class="party-badge adc">ADC</span>
-          <div class="card-role">Presidential Candidate</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Sokoto
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 56
-        </span>
-      </div>
-      <p class="card-bio">Medical Doctor &amp; Healthcare Reformist. MBChB, Bayero University; MPH, Harvard T.H. Chan School of Public Health.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <div class="card visible" data-party="adc">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Mrs. Blessing Nkechi Okafor</div>
-          <span class="party-badge adc">ADC</span>
-          <div class="card-role">Governorship Candidate – Enugu State</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Enugu
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 49
-        </span>
-      </div>
-      <p class="card-bio">Businesswoman &amp; Former State Commissioner. BSc Business Administration, UNN; MBA, Lagos Business School.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <div class="card visible" data-party="adc">
-      <div class="card-header">
-        <div class="avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4a7a5e" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="card-info">
-          <div class="card-name">Barr. Uche Emmanuel Ani</div>
-          <span class="party-badge adc">ADC</span>
-          <div class="card-role">Senatorial Candidate – Cross River South</div>
-        </div>
-      </div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Cross River
-        </span>
-        <span class="meta-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Age 42
-        </span>
-      </div>
-      <p class="card-bio">Barrister &amp; Youth Advocate. LLB, University of Calabar; BL, Nigerian Law School; LLM, University of Lagos.</p>
-      <button class="btn-manifesto">
-        View Manifesto
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
-  </div><!-- /grid -->
-</div>
-
-<script>
-  const filters = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.card[data-party]');
-
-  filters.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filters.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-
-      cards.forEach((card, i) => {
-        const match = filter === 'all' || card.dataset.party === filter;
-        if (match) {
-          card.style.display = '';
-          card.style.animationDelay = (i % 3 * 0.05) + 's';
-          // Re-trigger animation
-          card.style.animation = 'none';
-          card.offsetHeight;
-          card.style.animation = '';
-        } else {
-          card.style.display = 'none';
-        }
+        cards.forEach((card, i) => {
+          const match = filter === 'all' || card.dataset.party === filter;
+          if (match) {
+            card.style.display = '';
+            card.style.animationDelay = (i % 3 * 0.05) + 's';
+            // Re-trigger animation
+            card.style.animation = 'none';
+            card.offsetHeight;
+            card.style.animation = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
       });
     });
-  });
-</script>
-<script src="js/data.js"></script>
-<script src="js/candidates.js"></script>
-<script src="js/app.js"></script>
-<footer>
-  <p>Built by James and Samuel | AI Software Engineering Internship 2026</p>
-</footer>
+  </script>
+  <script src="js/data.js"></script>
+  <script src="js/candidates.js"></script>
+  <script src="js/app.js"></script>
+  <footer>
+    <p>Built by James and Samuel | AI Software Engineering Internship 2026</p>
+  </footer>
 </body>
+
 </html>

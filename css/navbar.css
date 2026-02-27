@@ -1,0 +1,75 @@
+:root {
+  --vw-nav-green-dark: #2d6a4f;
+  --vw-nav-bg: #eef0ee;
+  --vw-nav-text: #1a1a1a;
+  --vw-nav-hover: #dde5dc;
+}
+
+.vw-nav {
+  background: var(--vw-nav-bg);
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  height: 52px;
+  border-bottom: 1px solid #d5dcd4;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Source Sans 3', sans-serif;
+  margin: 0;
+}
+
+.vw-nav .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--vw-nav-text);
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.vw-nav .logo-icon {
+  width: 30px;
+  height: 30px;
+  background: var(--vw-nav-green-dark);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+}
+
+.vw-nav .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.vw-nav .nav-links li {
+  margin: 0;
+  padding: 0;
+}
+
+.vw-nav .nav-links a {
+  text-decoration: none;
+  color: var(--vw-nav-text);
+  font-size: 0.875rem;
+  padding: 6px 14px;
+  border-radius: 5px;
+  transition: background 0.15s;
+}
+
+.vw-nav .nav-links a:hover {
+  background: var(--vw-nav-hover);
+}
+
+.vw-nav .nav-links a.active {
+  background: var(--vw-nav-green-dark);
+  color: white;
+}

@@ -1,464 +1,594 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Truth & Answers Hub – FAQ & Myth Busting</title>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Truth & Answers Hub – FAQ & Myth Busting</title>
+  <link rel="stylesheet" href="css/navbar.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  :root {
-    --green-dark: #166534;
-    --green-mid: #16a34a;
-    --green-light: #f0faf4;
-    --green-border: #c6e6d2;
-    --text: #0d2b1a;
-    --muted: #4a7a5e;
-    --body-bg: #f7f8f5;
-    --card-bg: #ffffff;
-    --border: #e4e9e6;
-    --myth-red: #dc2626;
-    --fact-green: #16a34a;
-  }
+    :root {
+      --green-dark: #166534;
+      --green-mid: #16a34a;
+      --green-light: #f0faf4;
+      --green-border: #c6e6d2;
+      --text: #0d2b1a;
+      --muted: #4a7a5e;
+      --body-bg: #f7f8f5;
+      --card-bg: #ffffff;
+      --border: #e4e9e6;
+      --myth-red: #dc2626;
+      --fact-green: #16a34a;
+    }
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--body-bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--body-bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
 
-  /* ── HERO ── */
-  .hero {
-    background: var(--green-mid);
-    text-align: center;
-    padding: 56px 24px 52px;
-    color: white;
-  }
-  .hero-icon {
-    width: 48px;
-    height: 48px;
-    margin: 0 auto 16px;
-    border: 2.5px solid rgba(255,255,255,0.7);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hero-icon svg { width: 24px; height: 24px; stroke: white; fill: none; stroke-width: 2.2; }
-  .hero h1 {
-    font-size: 36px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    margin-bottom: 12px;
-    font-family: Georgia, 'Times New Roman', serif;
-  }
-  .hero p {
-    font-size: 15px;
-    opacity: 0.88;
-    max-width: 480px;
-    margin: 0 auto;
-    line-height: 1.55;
-  }
+    /* ── HERO ── */
+    .hero {
+      background: var(--green-mid);
+      text-align: center;
+      padding: 56px 24px 52px;
+      color: white;
+    }
 
-  /* ── MAIN CONTENT ── */
-  .main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 36px 24px 80px;
-  }
+    .hero-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 16px;
+      border: 2.5px solid rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  /* ── FILTERS ── */
-  .filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 36px;
-    justify-content: center;
-  }
-  .filter-btn {
-    padding: 7px 18px;
-    border-radius: 9999px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    border: 1.5px solid var(--border);
-    background: var(--card-bg);
-    color: var(--muted);
-    font-family: inherit;
-    transition: all 0.15s;
-    user-select: none;
-  }
-  .filter-btn:hover { border-color: var(--green-mid); color: var(--green-dark); }
-  .filter-btn.active {
-    background: var(--green-mid);
-    color: white;
-    border-color: var(--green-mid);
-  }
+    .hero-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2.2;
+    }
 
-  /* ── FAQ SECTION ── */
-  .section-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 16px;
-    font-family: Georgia, 'Times New Roman', serif;
-  }
+    .hero h1 {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+      font-family: Georgia, 'Times New Roman', serif;
+    }
 
-  .faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 48px;
-  }
+    .hero p {
+      font-size: 15px;
+      opacity: 0.88;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
 
-  .faq-item {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-    transition: border-color 0.15s;
-  }
-  .faq-item.open { border-color: var(--green-border); }
-  .faq-item[hidden] { display: none; }
+    /* ── MAIN CONTENT ── */
+    .main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 36px 24px 80px;
+    }
 
-  .faq-question {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 16px 20px;
-    background: none;
-    border: none;
-    text-align: left;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    font-family: inherit;
-    cursor: pointer;
-    line-height: 1.45;
-  }
-  .faq-question:hover { color: var(--green-dark); }
+    /* ── FILTERS ── */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 36px;
+      justify-content: center;
+    }
 
-  .faq-chevron {
-    flex-shrink: 0;
-    width: 18px;
-    height: 18px;
-    transition: transform 0.25s ease;
-    color: var(--muted);
-  }
-  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .filter-btn {
+      padding: 7px 18px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid var(--border);
+      background: var(--card-bg);
+      color: var(--muted);
+      font-family: inherit;
+      transition: all 0.15s;
+      user-select: none;
+    }
 
-  .faq-answer {
-    display: none;
-    padding: 14px 20px 18px;
-    font-size: 13.5px;
-    color: #374151;
-    line-height: 1.65;
-    border-top: 1px solid var(--green-border);
-  }
-  .faq-item.open .faq-answer { display: block; }
+    .filter-btn:hover {
+      border-color: var(--green-mid);
+      color: var(--green-dark);
+    }
 
-  /* ── MYTHS VS FACTS ── */
-  .myths-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+    .filter-btn.active {
+      background: var(--green-mid);
+      color: white;
+      border-color: var(--green-mid);
+    }
 
-  .myth-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
-  }
+    /* ── FAQ SECTION ── */
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      font-family: Georgia, 'Times New Roman', serif;
+    }
 
-  .myth-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-  .myth-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 3px 10px;
-    border-radius: 6px;
-    background: var(--myth-red);
-    color: white;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .myth-statement {
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.45;
-  }
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 48px;
+    }
 
-  .myth-fact {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 13px;
-    color: #374151;
-    line-height: 1.65;
-  }
-  .myth-fact-icon {
-    flex-shrink: 0;
-    margin-top: 2px;
-    width: 18px;
-    height: 18px;
-    color: var(--fact-green);
-  }
-</style>
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color 0.15s;
+    }
+
+    .faq-item.open {
+      border-color: var(--green-border);
+    }
+
+    .faq-item[hidden] {
+      display: none;
+    }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 20px;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      font-family: inherit;
+      cursor: pointer;
+      line-height: 1.45;
+    }
+
+    .faq-question:hover {
+      color: var(--green-dark);
+    }
+
+    .faq-chevron {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      transition: transform 0.25s ease;
+      color: var(--muted);
+    }
+
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 14px 20px 18px;
+      font-size: 13.5px;
+      color: #374151;
+      line-height: 1.65;
+      border-top: 1px solid var(--green-border);
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* ── MYTHS VS FACTS ── */
+    .myths-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .myth-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .myth-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .myth-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: var(--myth-red);
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .myth-statement {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .myth-fact {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.65;
+    }
+
+    .myth-fact-icon {
+      flex-shrink: 0;
+      margin-top: 2px;
+      width: 18px;
+      height: 18px;
+      color: var(--fact-green);
+    }
+  </style>
 </head>
+
 <body>
-<nav>
-  <a href="#" class="nav-logo">
-    <div class="logo-icon">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <nav class="vw-nav">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </div>
+      VoteWise
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="polling-stations.html">Polling Stations</a></li>
+      <li><a href="elections.html">Elections</a></li>
+      <li><a href="procedures.html">How to Vote</a></li>
+      <li><a href="candidates.html">Candidates</a></li>
+      <li><a href="FAQ.html">FAQ</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-icon">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3" />
+        <line x1="12" y1="17" x2="12.01" y2="17" />
+      </svg>
     </div>
-    VoteWise
-  </a>
-  <ul class="nav-links">
-    </li><a href="index.html">Home</a></li>
-    <li><a href="polling-stations.html">Polling Stations</a></li>
-    <li><a href="elections.html">Elections</a></li>
-    <li><a href="procedures.html">How to Vote</a></li>
-    <li><a href="candidates.html">Candidates</a></li>
-    <li><a href="FAQ.html">FAQ</a></li>
-  </ul>
-</nav>
-<!-- Hero -->
-<div class="hero">
-  <div class="hero-icon">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-  </div>
-  <h1>FAQ &amp; Myth Busting</h1>
-  <p>Get clear answers to common questions and separate fact from fiction.</p>
-</div>
-
-<div class="main">
-
-  <!-- Filters -->
-  <div class="filters">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="registration">Registration</button>
-    <button class="filter-btn" data-filter="voting-process">Voting Process</button>
-    <button class="filter-btn" data-filter="results">Results &amp; Transparency</button>
-    <button class="filter-btn" data-filter="eligibility">Eligibility</button>
-    <button class="filter-btn" data-filter="voter-rights">Voter Rights</button>
-    <button class="filter-btn" data-filter="ballots">Ballots</button>
-    <button class="filter-btn" data-filter="technology">Technology</button>
-    <button class="filter-btn" data-filter="candidate-info">Candidate Information</button>
-    <button class="filter-btn" data-filter="myths">Myths &amp; Misconceptions</button>
+    <h1>FAQ &amp; Myth Busting</h1>
+    <p>Get clear answers to common questions and separate fact from fiction.</p>
   </div>
 
-  <!-- FAQ -->
-  <h2 class="section-title">Frequently Asked Questions</h2>
+  <div class="main">
 
-  <div class="faq-list" id="faqList">
-
-    <div class="faq-item" data-category="registration">
-      <button class="faq-question" onclick="toggleFAQ(this)">
-        How do I register to vote in Nigeria?
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer">
-        You can register at any INEC registration centre in your local government area during active registration periods. Bring a valid form of ID (National ID, passport, or driver's licence) and proof of residence. INEC also runs a Continuous Voter Registration (CVR) exercise online at cvr.inecnigeria.org where you can pre-register before visiting an INEC office to complete biometric enrolment.
-      </div>
+    <!-- Filters -->
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="registration">Registration</button>
+      <button class="filter-btn" data-filter="voting-process">Voting Process</button>
+      <button class="filter-btn" data-filter="results">Results &amp; Transparency</button>
+      <button class="filter-btn" data-filter="eligibility">Eligibility</button>
+      <button class="filter-btn" data-filter="voter-rights">Voter Rights</button>
+      <button class="filter-btn" data-filter="ballots">Ballots</button>
+      <button class="filter-btn" data-filter="technology">Technology</button>
+      <button class="filter-btn" data-filter="candidate-info">Candidate Information</button>
+      <button class="filter-btn" data-filter="myths">Myths &amp; Misconceptions</button>
     </div>
 
-    <div class="faq-item" data-category="registration">
-      <button class="faq-question" onclick="toggleFAQ(this)">
-        Can I transfer my voter registration to a new state if I have relocated?
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer">
-        Yes. INEC allows registered voters to transfer their registration to a new polling unit. You must apply during an active CVR period using the INEC Voter Enrolment Device (IVED) at an INEC office in your new location. You will need to provide your existing Voter Identification Number (VIN) and biometric verification.
+    <!-- FAQ -->
+    <h2 class="section-title">Frequently Asked Questions</h2>
+
+    <div class="faq-list" id="faqList">
+
+      <div class="faq-item" data-category="registration">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          How do I register to vote in Nigeria?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="faq-answer">
+          You can register at any INEC registration centre in your local government area during active registration
+          periods. Bring a valid form of ID (National ID, passport, or driver's licence) and proof of residence. INEC
+          also runs a Continuous Voter Registration (CVR) exercise online at cvr.inecnigeria.org where you can
+          pre-register before visiting an INEC office to complete biometric enrolment.
+        </div>
       </div>
+
+      <div class="faq-item" data-category="registration">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          Can I transfer my voter registration to a new state if I have relocated?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="faq-answer">
+          Yes. INEC allows registered voters to transfer their registration to a new polling unit. You must apply during
+          an active CVR period using the INEC Voter Enrolment Device (IVED) at an INEC office in your new location. You
+          will need to provide your existing Voter Identification Number (VIN) and biometric verification.
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="voting-process">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          What do I need to bring to vote on election day?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="faq-answer">
+          You must bring your original Permanent Voter Card (PVC). No other document — including a National ID card,
+          driver's licence, or BVN slip — will be accepted as a substitute. Ensure your PVC matches the polling unit
+          where you are registered.
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="voting-process">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          What time do polling units open and close?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="faq-answer">
+          Polling units officially open at 8:30 AM and close at 2:30 PM. However, anyone who is already in the queue by
+          2:30 PM is entitled to vote. Voting does not stop for those already queuing when the official closing time is
+          reached.
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="results">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          How are election results transmitted and verified?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="faq-answer">
+          Results from each polling unit are entered into the INEC Result Viewing (IReV) portal in real time using the
+          BVAS device. The physical result sheet (Form EC8A) is signed by party agents and pasted publicly at the
+          polling unit. These results are then manually collated at ward, local government, state, and national levels.
+          Both the electronic upload and physical collation are expected to match.
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="eligibility">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          Can Nigerians in the diaspora vote?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="faq-answer">
+          Currently, Nigerians living abroad cannot vote in Nigerian elections. There is no diaspora voting provision in
+          the Electoral Act 2022. Proposals have been made to the National Assembly to allow diaspora voting, but no
+          legislation has been passed as of now. You must be physically present in Nigeria and registered in a polling
+          unit to vote.
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="voter-rights">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          What should I do if I am harassed or intimidated at a polling unit?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="faq-answer">
+          Report the situation immediately to the Presiding Officer or any INEC official at the polling unit. You can
+          also contact security agencies present (police or military). Document the incident if safe to do so — take
+          note of the time, location, and description of individuals involved. You may report to civil society election
+          observers or through INEC's complaint channels after the election.
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="ballots">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          What happens if I make a mistake on my ballot paper?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="faq-answer">
+          If you make a mistake before submitting your ballot, inform the Presiding Officer immediately. You are
+          entitled to one replacement ballot if the error occurred before you deposited it in the ballot box. Once a
+          ballot is placed in the box, it cannot be retrieved or replaced.
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="technology">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          What is BVAS and how does it affect my voting experience?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="faq-answer">
+          The Bimodal Voter Accreditation System (BVAS) is a device used by INEC to verify voters. It reads your PVC
+          chip and confirms your identity through fingerprint or facial recognition. You cannot vote without being
+          accredited on the BVAS. The device also uploads polling unit results directly to the IReV portal for public
+          viewing.
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="candidate-info">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          How can I find out what a candidate stands for before voting?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="faq-answer">
+          Review each candidate's official manifesto, which parties are required to publish. You can also attend town
+          halls and debates hosted by civil society groups, the media, and INEC. Platforms like Civic Voices compile
+          candidate profiles, policy positions, and voting records in an accessible format to help you make an informed
+          choice.
+        </div>
+      </div>
+
     </div>
 
-    <div class="faq-item" data-category="voting-process">
-      <button class="faq-question" onclick="toggleFAQ(this)">
-        What do I need to bring to vote on election day?
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer">
-        You must bring your original Permanent Voter Card (PVC). No other document — including a National ID card, driver's licence, or BVN slip — will be accepted as a substitute. Ensure your PVC matches the polling unit where you are registered.
-      </div>
-    </div>
+    <!-- Myths vs Facts -->
+    <h2 class="section-title">Myths vs. Facts</h2>
 
-    <div class="faq-item" data-category="voting-process">
-      <button class="faq-question" onclick="toggleFAQ(this)">
-        What time do polling units open and close?
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer">
-        Polling units officially open at 8:30 AM and close at 2:30 PM. However, anyone who is already in the queue by 2:30 PM is entitled to vote. Voting does not stop for those already queuing when the official closing time is reached.
-      </div>
-    </div>
+    <div class="myths-list">
 
-    <div class="faq-item" data-category="results">
-      <button class="faq-question" onclick="toggleFAQ(this)">
-        How are election results transmitted and verified?
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer">
-        Results from each polling unit are entered into the INEC Result Viewing (IReV) portal in real time using the BVAS device. The physical result sheet (Form EC8A) is signed by party agents and pasted publicly at the polling unit. These results are then manually collated at ward, local government, state, and national levels. Both the electronic upload and physical collation are expected to match.
+      <div class="myth-card">
+        <div class="myth-header">
+          <span class="myth-badge">MYTH</span>
+          <span class="myth-statement">Your vote doesn't count — results are always predetermined.</span>
+        </div>
+        <div class="myth-fact">
+          <svg class="myth-fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 12l3 3 5-5" />
+          </svg>
+          <span>This is false. Nigeria's elections have produced results that defied expectations, including incumbent
+            governors and presidents losing at the polls. The introduction of BVAS and real-time result upload via IReV
+            has significantly reduced the ability to alter results at collation centres. Voter turnout directly
+            determines outcomes, and every vote counted at your polling unit is recorded publicly.</span>
+        </div>
       </div>
-    </div>
 
-    <div class="faq-item" data-category="eligibility">
-      <button class="faq-question" onclick="toggleFAQ(this)">
-        Can Nigerians in the diaspora vote?
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer">
-        Currently, Nigerians living abroad cannot vote in Nigerian elections. There is no diaspora voting provision in the Electoral Act 2022. Proposals have been made to the National Assembly to allow diaspora voting, but no legislation has been passed as of now. You must be physically present in Nigeria and registered in a polling unit to vote.
+      <div class="myth-card">
+        <div class="myth-header">
+          <span class="myth-badge">MYTH</span>
+          <span class="myth-statement">You can vote without a PVC as long as you have your National ID or BVN.</span>
+        </div>
+        <div class="myth-fact">
+          <svg class="myth-fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 12l3 3 5-5" />
+          </svg>
+          <span>This is false. Only your original Permanent Voter Card (PVC) is accepted for accreditation on election
+            day. Neither a National Identity Card, driver's licence, BVN slip, nor any other government-issued document
+            can substitute for a PVC. If you have not collected your PVC, visit your INEC LGA office before the
+            collection deadline.</span>
+        </div>
       </div>
-    </div>
 
-    <div class="faq-item" data-category="voter-rights">
-      <button class="faq-question" onclick="toggleFAQ(this)">
-        What should I do if I am harassed or intimidated at a polling unit?
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer">
-        Report the situation immediately to the Presiding Officer or any INEC official at the polling unit. You can also contact security agencies present (police or military). Document the incident if safe to do so — take note of the time, location, and description of individuals involved. You may report to civil society election observers or through INEC's complaint channels after the election.
+      <div class="myth-card">
+        <div class="myth-header">
+          <span class="myth-badge">MYTH</span>
+          <span class="myth-statement">Accepting money from a politician does not influence your vote — you can collect
+            and still vote your conscience.</span>
+        </div>
+        <div class="myth-fact">
+          <svg class="myth-fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 12l3 3 5-5" />
+          </svg>
+          <span>While your ballot is secret, vote-buying is a criminal offence under Section 124 of the Electoral Act
+            2022, punishable by a fine and up to 12 months imprisonment — for both the giver and the receiver. Beyond
+            legality, widespread vote-buying distorts electoral outcomes and undermines democratic accountability.
+            Report vote-buying incidents to INEC or security agencies.</span>
+        </div>
       </div>
-    </div>
 
-    <div class="faq-item" data-category="ballots">
-      <button class="faq-question" onclick="toggleFAQ(this)">
-        What happens if I make a mistake on my ballot paper?
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer">
-        If you make a mistake before submitting your ballot, inform the Presiding Officer immediately. You are entitled to one replacement ballot if the error occurred before you deposited it in the ballot box. Once a ballot is placed in the box, it cannot be retrieved or replaced.
+      <div class="myth-card">
+        <div class="myth-header">
+          <span class="myth-badge">MYTH</span>
+          <span class="myth-statement">Pregnant women and the elderly are not allowed at polling units.</span>
+        </div>
+        <div class="myth-fact">
+          <svg class="myth-fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 12l3 3 5-5" />
+          </svg>
+          <span>This is entirely false. Every registered Nigerian citizen has the right to vote regardless of age,
+            physical condition, or pregnancy. INEC guidelines require polling unit staff to give priority accreditation
+            to pregnant women, nursing mothers, persons with disabilities, and elderly voters. They should be attended
+            to first, ahead of the general queue.</span>
+        </div>
       </div>
-    </div>
 
-    <div class="faq-item" data-category="technology">
-      <button class="faq-question" onclick="toggleFAQ(this)">
-        What is BVAS and how does it affect my voting experience?
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer">
-        The Bimodal Voter Accreditation System (BVAS) is a device used by INEC to verify voters. It reads your PVC chip and confirms your identity through fingerprint or facial recognition. You cannot vote without being accredited on the BVAS. The device also uploads polling unit results directly to the IReV portal for public viewing.
+      <div class="myth-card">
+        <div class="myth-header">
+          <span class="myth-badge">MYTH</span>
+          <span class="myth-statement">Once INEC announces a winner, no one can challenge the result.</span>
+        </div>
+        <div class="myth-fact">
+          <svg class="myth-fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 12l3 3 5-5" />
+          </svg>
+          <span>This is false. Any candidate or political party can file an election petition at the appropriate
+            tribunal within 21 days of the declaration of results. The Election Petition Tribunal and the Presidential
+            Election Petition Court are constitutionally empowered to nullify results and order fresh elections if
+            electoral malpractice is proven.</span>
+        </div>
       </div>
-    </div>
 
-    <div class="faq-item" data-category="candidate-info">
-      <button class="faq-question" onclick="toggleFAQ(this)">
-        How can I find out what a candidate stands for before voting?
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer">
-        Review each candidate's official manifesto, which parties are required to publish. You can also attend town halls and debates hosted by civil society groups, the media, and INEC. Platforms like Civic Voices compile candidate profiles, policy positions, and voting records in an accessible format to help you make an informed choice.
-      </div>
     </div>
 
   </div>
 
-  <!-- Myths vs Facts -->
-  <h2 class="section-title">Myths vs. Facts</h2>
+  <script>
+    function toggleFAQ(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
 
-  <div class="myths-list">
-
-    <div class="myth-card">
-      <div class="myth-header">
-        <span class="myth-badge">MYTH</span>
-        <span class="myth-statement">Your vote doesn't count — results are always predetermined.</span>
-      </div>
-      <div class="myth-fact">
-        <svg class="myth-fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
-        <span>This is false. Nigeria's elections have produced results that defied expectations, including incumbent governors and presidents losing at the polls. The introduction of BVAS and real-time result upload via IReV has significantly reduced the ability to alter results at collation centres. Voter turnout directly determines outcomes, and every vote counted at your polling unit is recorded publicly.</span>
-      </div>
-    </div>
-
-    <div class="myth-card">
-      <div class="myth-header">
-        <span class="myth-badge">MYTH</span>
-        <span class="myth-statement">You can vote without a PVC as long as you have your National ID or BVN.</span>
-      </div>
-      <div class="myth-fact">
-        <svg class="myth-fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
-        <span>This is false. Only your original Permanent Voter Card (PVC) is accepted for accreditation on election day. Neither a National Identity Card, driver's licence, BVN slip, nor any other government-issued document can substitute for a PVC. If you have not collected your PVC, visit your INEC LGA office before the collection deadline.</span>
-      </div>
-    </div>
-
-    <div class="myth-card">
-      <div class="myth-header">
-        <span class="myth-badge">MYTH</span>
-        <span class="myth-statement">Accepting money from a politician does not influence your vote — you can collect and still vote your conscience.</span>
-      </div>
-      <div class="myth-fact">
-        <svg class="myth-fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
-        <span>While your ballot is secret, vote-buying is a criminal offence under Section 124 of the Electoral Act 2022, punishable by a fine and up to 12 months imprisonment — for both the giver and the receiver. Beyond legality, widespread vote-buying distorts electoral outcomes and undermines democratic accountability. Report vote-buying incidents to INEC or security agencies.</span>
-      </div>
-    </div>
-
-    <div class="myth-card">
-      <div class="myth-header">
-        <span class="myth-badge">MYTH</span>
-        <span class="myth-statement">Pregnant women and the elderly are not allowed at polling units.</span>
-      </div>
-      <div class="myth-fact">
-        <svg class="myth-fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
-        <span>This is entirely false. Every registered Nigerian citizen has the right to vote regardless of age, physical condition, or pregnancy. INEC guidelines require polling unit staff to give priority accreditation to pregnant women, nursing mothers, persons with disabilities, and elderly voters. They should be attended to first, ahead of the general queue.</span>
-      </div>
-    </div>
-
-    <div class="myth-card">
-      <div class="myth-header">
-        <span class="myth-badge">MYTH</span>
-        <span class="myth-statement">Once INEC announces a winner, no one can challenge the result.</span>
-      </div>
-      <div class="myth-fact">
-        <svg class="myth-fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
-        <span>This is false. Any candidate or political party can file an election petition at the appropriate tribunal within 21 days of the declaration of results. The Election Petition Tribunal and the Presidential Election Petition Court are constitutionally empowered to nullify results and order fresh elections if electoral malpractice is proven.</span>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-
-<script>
-  function toggleFAQ(btn) {
-    const item = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  }
-
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      document.querySelectorAll('.faq-item').forEach(item => {
-        if (filter === 'all' || item.dataset.category === filter) {
-          item.removeAttribute('hidden');
-        } else {
-          item.setAttribute('hidden', '');
-          item.classList.remove('open');
-        }
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.faq-item').forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            item.removeAttribute('hidden');
+          } else {
+            item.setAttribute('hidden', '');
+            item.classList.remove('open');
+          }
+        });
       });
     });
-  });
-</script>
-<script src="js/data.js"></script>
-<script src="js/faq.js"></script>
-<script src="js/app.js"></script>
-<footer>
-  <p>Built by James and Samuel | AI Software Engineering Internship 2026</p>
-</footer>
+  </script>
+  <script src="js/data.js"></script>
+  <script src="js/faq.js"></script>
+  <script src="js/app.js"></script>
+  <footer>
+    <p>Built by James and Samuel | AI Software Engineering Internship 2026</p>
+  </footer>
 </body>
+
 </html>
