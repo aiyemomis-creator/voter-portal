@@ -51,6 +51,21 @@ if (searchBtn) {
   });
 }
 document.addEventListener("DOMContentLoaded", () => {
+  // Mobile Hamburger Menu Injection
+  const nav = document.querySelector('.vw-nav');
+  if (nav && !document.querySelector('.hamburger')) {
+    const hamburger = document.createElement('div');
+    hamburger.className = 'hamburger';
+    hamburger.innerHTML = '<span></span><span></span><span></span>';
+    nav.appendChild(hamburger);
+
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+  }
+
   const currentPage = window.location.pathname.split("/").pop();
 
   const navLinks = document.querySelectorAll("nav a");
@@ -75,8 +90,8 @@ document.addEventListener("DOMContentLoaded", function () {
   navLinks.forEach(link => {
     const linkPage = link.getAttribute("href");
 
-    if (linkPage === currentPage || 
-        (currentPage === "" && linkPage === "index.html")) {
+    if (linkPage === currentPage ||
+      (currentPage === "" && linkPage === "index.html")) {
       link.classList.add("active");
     }
 

@@ -73,3 +73,87 @@
   background: var(--vw-nav-green-dark);
   color: white;
 }
+
+/* Hamburger Icon (Hidden on Desktop) */
+.vw-nav .hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.vw-nav .hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: var(--vw-nav-text);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile Navbar Styles */
+@media (max-width: 768px) {
+  .vw-nav {
+    padding: 0 20px;
+  }
+
+  .vw-nav .hamburger {
+    display: flex;
+  }
+
+  /* Reset margin on logo so hamburger stays right */
+  .vw-nav .nav-logo {
+    margin-right: 0;
+  }
+
+  .vw-nav .nav-links {
+    position: absolute;
+    top: 52px;
+    /* Nav height */
+    left: 0;
+    right: 0;
+    background: var(--vw-nav-bg);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 20px;
+    gap: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #d5dcd4;
+
+    /* Hidden by default via transform */
+    transform: translateY(-150%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: -1;
+  }
+
+  .vw-nav .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    z-index: 1000;
+  }
+
+  .vw-nav .nav-links li {
+    width: 100%;
+  }
+
+  .vw-nav .nav-links a {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+  }
+
+  /* Hamburger Animation */
+  .vw-nav .hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .vw-nav .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .vw-nav .hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
